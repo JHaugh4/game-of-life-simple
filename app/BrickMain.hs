@@ -5,7 +5,7 @@ module BrickMain (run) where
 -- but pays off as your code grows more and more.
 -- This is because at a glance you can tell where
 -- a certain function came from.
-import Brick.Main (App(..), customMain, neverShowCursor)
+import Brick.Main (App(..), customMain, neverShowCursor, resizeOrQuit)
 import Brick.Types (Widget, BrickEvent(..), EventM, get, put)
 import Brick.Widgets.Core (str)
 import Brick.Widgets.Table (table, renderTable)
@@ -52,7 +52,7 @@ handleEvent (AppEvent Tick) = do
     grid <- get
     put (evolve grid)
 -- Any other event just do nothing
-handleEvent bevent = return ()
+handleEvent bevent = resizeOrQuit bevent
 
 -- Now lets create our App
 theMap :: AttrMap
